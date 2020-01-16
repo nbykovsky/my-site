@@ -1,0 +1,7 @@
+language: javascript
+
+services:
+    - docker
+
+script:
+    - docker build .

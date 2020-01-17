@@ -8,7 +8,7 @@ script:
 - npm test
 - npm run build
 - curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
-- tar -C /tmp -xf /tmp/google-cloud-sdk.tar.gz && /tmp/google-cloud-sdk/install.sh
+- tar -C /tmp -xf /tmp/google-cloud-sdk.tar.gz && bash /tmp/google-cloud-sdk/install.sh --disable-prompts
 - gcloud auth activate-service-account --key-file=gcpkey.json
 - gsutil cp -r build/. gs://dev.bykovsky.com
 before_install:

@@ -4,8 +4,6 @@ node_js:
 cache:
   directories:
   - node_modules
-# env:
-# - PATH="/usr/local/gcloud/google-cloud-sdk/bine"
 script:
 - npm test
 - npm run build

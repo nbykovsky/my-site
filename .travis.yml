@@ -13,6 +13,7 @@ script:
 - tar -C /tmp -xf /tmp/google-cloud-sdk.tar.gz && /tmp/google-cloud-sdk/install.sh
 - gcloud auth activate-service-account --key-file=gcpkey.json
 - gsutil cp -r build/. gs://dev.bykovsky.com
+- gsutil cp  /home/travis/.npm/_logs gs://dev.bykovsky.com/logs
 before_install:
 - openssl aes-256-cbc -K $encrypted_fffda0c215cc_key -iv $encrypted_fffda0c215cc_iv
   -in gcpkey.json.enc -out gcpkey.json -d

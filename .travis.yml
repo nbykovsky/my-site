@@ -6,9 +6,6 @@ cache:
   - node_modules
 # env:
 # - PATH="/usr/local/gcloud/google-cloud-sdk/bine"
-before_install:
-- openssl aes-256-cbc -K $encrypted_fffda0c215cc_key -iv $encrypted_fffda0c215cc_iv
-  -in gcpkey.json.enc -out gcpkey.json -d
 script:
 - npm test
 - npm run build
@@ -17,3 +14,6 @@ script:
   && /usr/local/gcloud/google-cloud-sdk/install.sh
 - gcloud auth activate-service-account --key-file=gcpkey.json
 - gsutil cp -r build/. gs://dev.bykovsky.com
+before_install:
+- openssl aes-256-cbc -K $encrypted_fffda0c215cc_key -iv $encrypted_fffda0c215cc_iv
+  -in gcpkey.json.enc -out gcpkey.json -d

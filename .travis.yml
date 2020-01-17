@@ -1,14 +1,16 @@
 language: node_js
 node_js:
 - stable
+env:
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 cache:
   directories:
   - node_modules
 script:
 - npm test
 - npm run build
-- curl https://sdk.cloud.google.com > install.sh
-- bash install.sh --disable-prompts
+- curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
+- tar -C /tmp -xf /tmp/google-cloud-sdk.tar.gz && /tmp/google-cloud-sdk/install.sh
 - gcloud auth activate-service-account --key-file=gcpkey.json
 - gsutil cp -r build/. gs://dev.bykovsky.com
 before_install:

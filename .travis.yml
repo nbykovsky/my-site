@@ -1,17 +1,19 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
   - node_modules
+env:
+- PATH="/usr/local/gcloud/google-cloud-sdk/bine"
+before_install:
+- openssl aes-256-cbc -K $encrypted_fffda0c215cc_key -iv $encrypted_fffda0c215cc_iv
+  -in gcpkey.json.enc -out gcpkey.json -d
 script:
-  - npm test
-  - npm run build
-
-deploy:
-    provider: gcs
-    access_key_id: "$private_key_id"
-    secret_access_key: "$private_key"
-    bucket: "dev.bykovsky.com"
-    skip_cleanup: true
-    local-dir: build
+- npm test
+- npm run build
+- curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
+- mkdir -p /usr/local/gcloud && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz
+  && /usr/local/gcloud/google-cloud-sdk/install.sh
+- gcloud auth activate-service-account --key-file=gcpkey.json
+- gsutil cp -r build/. gs://dev.bykovsky.com

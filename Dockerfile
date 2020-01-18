@@ -20,5 +20,4 @@ ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 RUN gcloud auth activate-service-account --key-file=gcpkey.json
 
 RUN mkdir /root/.npm/_logs && \
-  gsutil cp -r build/. gs://dev.bykovsky.com && \
-  gsutil cp -r /root/.npm/_logs/. gs://dev.bykovsky.com/logs
+  gsutil cp -r build/. gs://dev.bykovsky.com 

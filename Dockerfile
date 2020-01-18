@@ -3,6 +3,8 @@ WORKDIR /usr/src/app
 
 COPY . ./
 
+RUN npm install
+
 RUN npm run build
 
 ENV CLOUDSDK_CORE_DISABLE_PROMPTS=1
@@ -19,4 +21,4 @@ ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 RUN gcloud auth activate-service-account --key-file=gcpkey.json
 
 RUN gsutil cp -r build/. gs://dev.bykovsky.com
-RUN gsutil cp -r /home/travis/.npm/_logs/. gs://dev.bykovsky.com/logs
+RUN gsutil cp -r /root/.npm/_logs/. gs://dev.bykovsky.com/logs
